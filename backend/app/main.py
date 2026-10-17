@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .config import settings
-from .routes import accounts, transactions, reports
+from .routes import accounts, transactions, reports, imports
 
 app = FastAPI(title="FinSight AI API", version="0.1.0")
 
@@ -17,6 +17,7 @@ app.add_middleware(
 app.include_router(accounts.router, prefix="/api")
 app.include_router(transactions.router, prefix="/api")
 app.include_router(reports.router, prefix="/api")
+app.include_router(imports.router, prefix="/api")
 
 @app.get("/")
 def root():
