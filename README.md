@@ -2,21 +2,30 @@
 
 Personal finance and small-business financial analytics platform.
 
-**Status:** 🏗️ Under Development
+**Status:** 🎉 **MVP Complete (v0.1.0)** — Ready for beta testing
 
 ## Overview
 
 FinSight AI helps you understand your financial position, track transactions, manage budgets, analyze cash flow, and forecast future scenarios.
 
+**What Works:**
+- ✅ User authentication (JWT)
+- ✅ Account management (create, list, archive)
+- ✅ Transaction tracking (income, expense, transfers)
+- ✅ Real-time financial summaries
+- ✅ Decimal-safe calculations
+- ✅ Responsive dashboard
+- ✅ Workspace isolation
+
 **Key Features:**
 - 📊 Transaction tracking (income, expenses, transfers)
 - 💰 Account management (cash, bank, savings, business)
-- 📈 Budget monitoring and alerts
+- 📈 Budget monitoring and alerts (backend ready)
 - 📉 Cash flow analysis and reports
-- 🔮 Forecasting and scenario planning
-- 📁 CSV import/export
-- 🤖 AI-powered insights (optional)
-- 🔒 Privacy-first, local-first
+- 🔮 Forecasting and scenario planning (methodology documented)
+- 📁 CSV import/export (backend complete)
+- 🤖 AI-powered insights (optional, P2)
+- 🔒 Privacy-first, workspace-isolated
 
 ## Technology Stack
 
