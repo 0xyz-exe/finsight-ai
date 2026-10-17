@@ -79,26 +79,33 @@ uvicorn app.main:app --reload
 - Repository audit, PRD, architecture, threat model
 
 **Milestone B** ✅ Complete (Financial Foundation)
-- ✅ Database models (accounts, transactions, categories)
-- ✅ Alembic migrations
-- ✅ CRUD API (accounts, transactions)
-- ✅ Decimal-safe arithmetic utilities
-- ✅ Transfer handling (two linked transactions)
-- ✅ Balance calculation service
-- ✅ Period summary reports (income/expense/net)
-- ✅ Tests: decimal utils (7/7 passed)
+- Database models, migrations, CRUD API
+- Transfer handling, balance calculations
+- Decimal-safe arithmetic (tests passing)
 
-**Milestone C** ⏳ Next (CSV Import)
-- File upload endpoint
-- Column mapping
-- Validation and preview
-- Duplicate detection
-- Confirmed import
+**Milestone C** ✅ Complete (CSV Import)
+- File upload endpoint (multipart, 10MB limit)
+- Column mapping (date, amount/debit/credit, description)
+- Row validation with error details
+- Duplicate detection (fuzzy matching)
+- Import preview with status (valid/warning/error)
+- Batch import confirmation
+- Formula injection escaping
 
-**Milestone D-F** ⏳ Remaining
-- Frontend (Next.js)
-- Analytics and charts
-- Forecasting
+**Milestone D** ✅ Complete (Frontend Foundation)
+- Next.js 14 setup with TypeScript
+- Dashboard with summary cards
+- Accounts and transactions display
+- API client with typed interfaces
+- IDR currency formatting
+- Responsive layout (Tailwind CSS)
+
+**Milestone E-F** ⏳ Remaining
+- Transaction/account creation forms
+- CSV import wizard UI
+- Charts and analytics
+- Auth (JWT)
+- Audit logging
 - Security hardening
 
 ## License
