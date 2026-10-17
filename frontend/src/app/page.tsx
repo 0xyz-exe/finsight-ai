@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { accountsApi, transactionsApi, reportsApi, type Account, type Transaction } from '@/lib/api';
 import { formatCurrency, formatDateShort } from '@/lib/format';
+import AccountForm from '@/components/AccountForm';
+import TransactionForm from '@/components/TransactionForm';
 
 export default function Home() {
   const { user, loading: authLoading, logout } = useAuth();
@@ -11,6 +13,8 @@ export default function Home() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [summary, setSummary] = useState<{ income: string; expense: string; net: string } | null>(null);
   const [loading, setLoading] = useState(true);
+  const [showAccountForm, setShowAccountForm] = useState(false);
+  const [showTransactionForm, setShowTransactionForm] = useState(false);
 
   useEffect(() => {
     if (!authLoading && user) {
@@ -65,12 +69,26 @@ export default function Home() {
             <h1 className="text-3xl font-bold text-gray-900">FinSight AI</h1>
             <p className="text-gray-600">Welcome, {user.email}</p>
           </div>
-          <button
-            onClick={logout}
-            className="px-4 py-2 text-sm bg-gray-200 hover:bg-gray-300 rounded"
-          >
-            Logout
-          </button>
+          <div className="flex gap-3">
+            <button
+              onClick={() => setShowAccountForm(true)}
+              className="px-4 py-2 text-sm bg-blue-600 text-white hover:bg-blue-700 rounded"
+            >
+              + Account
+            </button>
+            <button
+              onClick={() => setShowTransactionForm(true)}
+              className="px-4 py-2 text-sm bg-green-600 text-white hover:bg-green-700 rounded"
+            >
+              + Transaction
+            </button>
+            <button
+              onClick={logout}
+              className="px-4 py-2 text-sm bg-gray-200 hover:bg-gray-300 rounded"
+            >
+              Logout
+            </button>
+          </div>
         </header>
 
         {/* Summary Cards */}
@@ -153,6 +171,20 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {showAccountForm && (
+        <AccountForm
+          onClose={() => setShowAccountForm(false)}
+          onSuccess={loadDashboard}
+        />
+      )}
+
+      {showTransactionForm && (
+        <TransactionForm
+          onClose={() => setShowTransactionForm(false)}
+          onSuccess={loadDashboard}
+        />
+      )}
     </div>
   );
 }
