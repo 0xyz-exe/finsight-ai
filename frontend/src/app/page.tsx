@@ -1,18 +1,22 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useAuth } from '@/contexts/AuthContext';
 import { accountsApi, transactionsApi, reportsApi, type Account, type Transaction } from '@/lib/api';
 import { formatCurrency, formatDateShort } from '@/lib/format';
 
 export default function Home() {
+  const { user, loading: authLoading, logout } = useAuth();
   const [accounts, setAccounts] = useState<Account[]>([]);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [summary, setSummary] = useState<{ income: string; expense: string; net: string } | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    loadDashboard();
-  }, []);
+    if (!authLoading && user) {
+      loadDashboard();
+    }
+  }, [authLoading, user]);
 
   async function loadDashboard() {
     try {
@@ -38,7 +42,7 @@ export default function Home() {
     }
   }
 
-  if (loading) {
+  if (authLoading || loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-lg">Loading...</div>
@@ -46,12 +50,27 @@ export default function Home() {
     );
   }
 
+  if (!user) {
+    if (typeof window !== 'undefined') {
+      window.location.href = '/login';
+    }
+    return null;
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 p-8">
       <div className="max-w-7xl mx-auto">
-        <header className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">FinSight AI</h1>
-          <p className="text-gray-600">Personal Finance Dashboard</p>
+        <header className="mb-8 flex justify-between items-center">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900">FinSight AI</h1>
+            <p className="text-gray-600">Welcome, {user.email}</p>
+          </div>
+          <button
+            onClick={logout}
+            className="px-4 py-2 text-sm bg-gray-200 hover:bg-gray-300 rounded"
+          >
+            Logout
+          </button>
         </header>
 
         {/* Summary Cards */}
