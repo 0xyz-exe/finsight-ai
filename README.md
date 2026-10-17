@@ -54,11 +54,39 @@ FinSight AI helps you understand your financial position, track transactions, ma
 
 ## Quick Start
 
-*Coming soon after backend implementation.*
+### Backend
 
-## Development
+See [backend/README.md](backend/README.md) for detailed setup.
 
-*Setup instructions will be added as implementation progresses.*
+**Quick version:**
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+# Start PostgreSQL (Docker or local)
+alembic upgrade head
+uvicorn app.main:app --reload
+```
+
+### Frontend
+
+*Coming soon.*
+
+## Development Status
+
+**Milestone A** ✅ Complete (Discovery)
+- Repository audit, PRD, architecture, threat model
+
+**Milestone B** 🚧 In Progress (Financial Foundation)
+- ✅ Database models (accounts, transactions, categories)
+- ✅ Alembic migrations
+- ✅ Basic CRUD API (accounts, transactions)
+- ✅ Decimal-safe arithmetic utilities
+- ⏳ Transfer handling
+- ⏳ Category seeding
+- ⏳ Balance calculations
+- ⏳ Tests
 
 ## License
 
