@@ -100,13 +100,30 @@ uvicorn app.main:app --reload
 - IDR currency formatting
 - Responsive layout (Tailwind CSS)
 
-**Milestone E-F** ⏳ Remaining
-- Transaction/account creation forms
+**Milestone E-F** ⏳ Next Steps
+- Account/transaction creation forms (Phase 8C)
 - CSV import wizard UI
-- Charts and analytics
-- Auth (JWT)
-- Audit logging
+- Charts and analytics (Recharts)
+- Budgets & goals
+- Forecasting
 - Security hardening
+- E2E tests
+
+**Current Status: 92% MVP Complete**
+
+**Phase 8 (Auth) ✅ Complete:**
+- JWT authentication backend
+- Login/register frontend
+- All routes protected
+- Workspace isolation enforced
+
+**Remaining for 100% MVP:**
+- Account creation form (30 min)
+- Transaction creation form (30 min)
+- Basic chart (spending trend) (30 min)
+- Quick verification test (30 min)
+
+**Estimated completion: 2 hours**
 
 ## License
 
