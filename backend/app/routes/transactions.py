@@ -12,9 +12,26 @@ TEMP_WORKSPACE_ID = "00000000-0000-0000-0000-000000000001"
 
 @router.post("", response_model=TransactionResponse, status_code=201)
 def create_transaction(txn: TransactionCreate, db: Session = Depends(get_db)):
-    # ponytail: Transfer creates two linked txns; add after basic CRUD works
+    from ..services.transaction_service import create_transfer
+    
     if txn.transaction_type == "transfer":
-        raise HTTPException(status_code=400, detail="Transfers not yet implemented")
+        if not txn.transfer_to_account_id:
+            raise HTTPException(status_code=400, detail="transfer_to_account_id required for transfers")
+        
+        try:
+            source_txn, dest_txn = create_transfer(
+                db=db,
+                workspace_id=TEMP_WORKSPACE_ID,
+                source_account_id=txn.account_id,
+                destination_account_id=txn.transfer_to_account_id,
+                amount=txn.amount,
+                transaction_date=txn.transaction_date,
+                description=txn.description or "",
+            )
+            db.commit()
+            return source_txn
+        except ValueError as e:
+            raise HTTPException(status_code=400, detail=str(e))
     
     if txn.transaction_type in ("income", "expense") and not txn.category_id:
         raise HTTPException(status_code=400, detail="Category required for income/expense")
