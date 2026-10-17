@@ -78,15 +78,28 @@ uvicorn app.main:app --reload
 **Milestone A** ✅ Complete (Discovery)
 - Repository audit, PRD, architecture, threat model
 
-**Milestone B** 🚧 In Progress (Financial Foundation)
+**Milestone B** ✅ Complete (Financial Foundation)
 - ✅ Database models (accounts, transactions, categories)
 - ✅ Alembic migrations
-- ✅ Basic CRUD API (accounts, transactions)
+- ✅ CRUD API (accounts, transactions)
 - ✅ Decimal-safe arithmetic utilities
-- ⏳ Transfer handling
-- ⏳ Category seeding
-- ⏳ Balance calculations
-- ⏳ Tests
+- ✅ Transfer handling (two linked transactions)
+- ✅ Balance calculation service
+- ✅ Period summary reports (income/expense/net)
+- ✅ Tests: decimal utils (7/7 passed)
+
+**Milestone C** ⏳ Next (CSV Import)
+- File upload endpoint
+- Column mapping
+- Validation and preview
+- Duplicate detection
+- Confirmed import
+
+**Milestone D-F** ⏳ Remaining
+- Frontend (Next.js)
+- Analytics and charts
+- Forecasting
+- Security hardening
 
 ## License
 
