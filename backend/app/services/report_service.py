@@ -1,5 +1,4 @@
 from sqlalchemy.orm import Session
-from sqlalchemy import func, case
 from decimal import Decimal
 from uuid import UUID
 from datetime import date
@@ -18,31 +17,24 @@ def calculate_account_balance(db: Session, account_id: UUID, workspace_id: UUID)
     if not account:
         raise ValueError("Account not found")
     
-    # Aggregate transactions
-    result = db.query(
-        func.sum(
-            case(
-                (Transaction.transaction_type == "income", Transaction.amount),
-                (Transaction.transaction_type == "expense", -Transaction.amount),
-                (
-                    (Transaction.transaction_type == "transfer") & 
-                    (Transaction.account_id == account_id),
-                    -Transaction.amount
-                ),
-                (
-                    (Transaction.transaction_type == "transfer") & 
-                    (Transaction.transfer_to_account_id == account_id),
-                    Transaction.amount
-                ),
-                else_=0
-            )
-        )
-    ).filter(
-        (Transaction.account_id == account_id) | 
-        (Transaction.transfer_to_account_id == account_id)
-    ).scalar()
-    
-    transaction_sum = Decimal(str(result)) if result else Decimal("0")
+    transactions = db.query(Transaction).filter(
+        Transaction.account_id == account_id
+    ).all()
+    transaction_sum = Decimal("0")
+    for transaction in transactions:
+        if transaction.transaction_type == "income":
+            transaction_sum += transaction.amount
+        elif transaction.transaction_type == "expense":
+            transaction_sum -= transaction.amount
+        elif transaction.transfer_pair_id:
+            pair = db.query(Transaction).filter(
+                Transaction.id == transaction.transfer_pair_id
+            ).first()
+            if pair and transaction.created_at and pair.created_at:
+                transaction_sum += transaction.amount if transaction.created_at > pair.created_at else -transaction.amount
+        elif transaction.transfer_to_account_id:
+            transaction_sum -= transaction.amount
+
     balance = account.initial_balance + transaction_sum
     
     return round_currency(balance)

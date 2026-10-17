@@ -1,13 +1,12 @@
 from sqlalchemy import Column, String, TIMESTAMP, ForeignKey, Boolean, func, UniqueConstraint, CheckConstraint
-from sqlalchemy.dialects.postgresql import UUID
 import uuid
-from ..database import Base
+from ..database import Base, GUID
 
 class Category(Base):
     __tablename__ = "categories"
     
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    workspace_id = Column(UUID(as_uuid=True), ForeignKey("workspaces.id", ondelete="CASCADE"), nullable=False, index=True)
+    id = Column(GUID(), primary_key=True, default=uuid.uuid4)
+    workspace_id = Column(GUID(), ForeignKey("workspaces.id", ondelete="CASCADE"), nullable=False, index=True)
     name = Column(String(255), nullable=False)
     category_type = Column(String(10), nullable=False)  # 'income' or 'expense'
     color = Column(String(7), default="#6B7280")

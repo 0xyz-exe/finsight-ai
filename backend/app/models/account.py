@@ -1,13 +1,12 @@
 from sqlalchemy import Column, String, TIMESTAMP, ForeignKey, NUMERIC, func, CheckConstraint, UniqueConstraint
-from sqlalchemy.dialects.postgresql import UUID
 import uuid
-from ..database import Base
+from ..database import Base, GUID
 
 class Account(Base):
     __tablename__ = "accounts"
     
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    workspace_id = Column(UUID(as_uuid=True), ForeignKey("workspaces.id", ondelete="CASCADE"), nullable=False, index=True)
+    id = Column(GUID(), primary_key=True, default=uuid.uuid4)
+    workspace_id = Column(GUID(), ForeignKey("workspaces.id", ondelete="CASCADE"), nullable=False, index=True)
     name = Column(String(255), nullable=False)
     account_type = Column(String(20), nullable=False)  # 'cash', 'bank', 'savings', 'business'
     currency = Column(String(3), default="IDR")

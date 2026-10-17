@@ -1,12 +1,11 @@
 from sqlalchemy import Column, String, TIMESTAMP, func
-from sqlalchemy.dialects.postgresql import UUID
 import uuid
-from ..database import Base
+from ..database import Base, GUID
 
 class User(Base):
     __tablename__ = "users"
     
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    id = Column(GUID(), primary_key=True, default=uuid.uuid4)
     email = Column(String(255), unique=True, nullable=False, index=True)
     password_hash = Column(String(255), nullable=False)
     full_name = Column(String(255))

@@ -17,8 +17,14 @@ export default function Home() {
   const [showTransactionForm, setShowTransactionForm] = useState(false);
 
   useEffect(() => {
-    if (!authLoading && user) {
+    if (authLoading) {
+      return;
+    }
+
+    if (user) {
       loadDashboard();
+    } else {
+      setLoading(false);
     }
   }, [authLoading, user]);
 

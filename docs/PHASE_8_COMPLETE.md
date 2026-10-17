@@ -170,32 +170,32 @@ alembic upgrade head
 uvicorn app.main:app --reload
 
 # 2. Register user
-curl -X POST http://localhost:8000/api/auth/register \
+curl -X POST http://localhost:8001/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{"email":"test@example.com","password":"testpass123","full_name":"Test User"}'
 
 # 3. Login
-curl -X POST http://localhost:8000/api/auth/login \
+curl -X POST http://localhost:8001/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{"email":"test@example.com","password":"testpass123"}'
 # → save access_token
 
 # 4. Get profile
-curl http://localhost:8000/api/auth/me \
+curl http://localhost:8001/api/auth/me \
   -H "Authorization: Bearer <token>"
 
 # 5. Create account (requires token)
-curl -X POST http://localhost:8000/api/accounts \
+curl -X POST http://localhost:8001/api/accounts \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer <token>" \
   -d '{"name":"My Wallet","account_type":"cash","currency":"IDR","initial_balance":"1000000"}'
 
 # 6. List accounts
-curl http://localhost:8000/api/accounts \
+curl http://localhost:8001/api/accounts \
   -H "Authorization: Bearer <token>"
 
 # 7. Try without token (should fail 401)
-curl http://localhost:8000/api/accounts
+curl http://localhost:8001/api/accounts
 ```
 
 ### Frontend Test Flow

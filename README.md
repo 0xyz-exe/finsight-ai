@@ -1,143 +1,229 @@
 # FinSight AI
 
-Personal finance and small-business financial analytics platform.
+Personal finance and small-business financial analytics built with Next.js and
+FastAPI.
 
-**Status:** 🎉 **MVP Complete (v0.1.0)** — Ready for beta testing
+> **Status:** MVP complete and ready for beta testing.
 
-## Overview
+FinSight AI helps users track accounts and transactions, understand cash flow,
+and view financial summaries in a workspace-isolated dashboard.
 
-FinSight AI helps you understand your financial position, track transactions, manage budgets, analyze cash flow, and forecast future scenarios.
+## Features
 
-**What Works:**
-- ✅ User authentication (JWT)
-- ✅ Account management (create, list, archive)
-- ✅ Transaction tracking (income, expense, transfers)
-- ✅ Real-time financial summaries
-- ✅ Decimal-safe calculations
-- ✅ Responsive dashboard
-- ✅ Workspace isolation
+- JWT authentication with login and registration
+- Workspace-isolated user data
+- Account management for cash, bank, savings, and business accounts
+- Income, expense, and transfer transactions
+- Decimal-safe balance and cash-flow calculations
+- Current-period financial summaries
+- CSV import and export support in the backend
+- Responsive dashboard with IDR currency formatting
 
-**Key Features:**
-- 📊 Transaction tracking (income, expenses, transfers)
-- 💰 Account management (cash, bank, savings, business)
-- 📈 Budget monitoring and alerts (backend ready)
-- 📉 Cash flow analysis and reports
-- 🔮 Forecasting and scenario planning (methodology documented)
-- 📁 CSV import/export (backend complete)
-- 🤖 AI-powered insights (optional, P2)
-- 🔒 Privacy-first, workspace-isolated
+## Tech stack
 
-## Technology Stack
-
-- **Frontend:** Next.js 14, TypeScript, Tailwind CSS, shadcn/ui
-- **Backend:** FastAPI (Python 3.11+)
+- **Frontend:** Next.js 14, React 18, TypeScript, Tailwind CSS
+- **Backend:** FastAPI, Python 3.11+
 - **Database:** PostgreSQL 15+
-- **Deployment:** Docker Compose (optional)
+- **ORM and migrations:** SQLAlchemy, Alembic
+
+## Repository structure
+
+```text
+.
+├── backend/       FastAPI application, models, migrations, and tests
+├── frontend/      Next.js application
+├── docs/          Product, architecture, database, and security documentation
+└── .env.example   Backend environment template
+```
+
+## Prerequisites
+
+- Python 3.11 or newer
+- Node.js 18 or newer
+- PostgreSQL 15 or newer
+- Git
+
+Docker can be used to run PostgreSQL locally.
+
+## Quick start
+
+### 1. Clone the repository
+
+```bash
+git clone <your-repository-url>
+cd finsight-ai
+```
+
+Replace `<your-repository-url>` with the URL of your GitHub repository.
+
+### 2. Start PostgreSQL
+
+Using Docker:
+
+```bash
+docker run --name finsight-db \
+  -e POSTGRES_USER=finsight \
+  -e POSTGRES_PASSWORD=finsight \
+  -e POSTGRES_DB=finsight \
+  -p 5432:5432 \
+  -d postgres:15
+```
+
+If the container already exists, start it with:
+
+```bash
+docker start finsight-db
+```
+
+### 3. Configure the backend
+
+From the repository root, copy the environment template:
+
+```powershell
+Copy-Item .env.example backend\.env
+```
+
+For macOS/Linux:
+
+```bash
+cp .env.example backend/.env
+```
+
+Review `backend/.env` and change `SECRET_KEY` before using the application
+outside local development. Never commit `.env` or real credentials.
+
+The default database configuration expects:
+
+```text
+DATABASE_URL=postgresql://finsight:finsight@localhost:5432/finsight
+```
+
+### 4. Install and run the backend
+
+#### Windows PowerShell
+
+```powershell
+cd backend
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+python -m pip install -r requirements-dev.txt
+alembic upgrade head
+python -m uvicorn app.main:app --reload --port 8000
+```
+
+If PowerShell blocks activation scripts, run this once for your user:
+
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+#### macOS/Linux
+
+```bash
+cd backend
+python3 -m venv venv
+source venv/bin/activate
+python -m pip install -r requirements.txt
+python -m pip install -r requirements-dev.txt
+alembic upgrade head
+python -m uvicorn app.main:app --reload --port 8000
+```
+
+The backend is available at:
+
+- API: <http://localhost:8000>
+- Swagger UI: <http://localhost:8000/docs>
+- Health check: <http://localhost:8000/health>
+
+Expected health response:
+
+```json
+{"status":"ok"}
+```
+
+### 5. Install and run the frontend
+
+Open a second terminal:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+The dashboard is available at <http://localhost:3000>.
+
+The frontend uses `http://localhost:8000/api` by default. To use another API
+URL, create `frontend/.env.local`:
+
+```text
+NEXT_PUBLIC_API_URL=http://localhost:8000/api
+```
+
+Restart the frontend after changing environment variables.
+
+## Testing and builds
+
+Run backend tests:
+
+```bash
+cd backend
+venv\Scripts\python.exe -m pytest -q       # Windows
+./venv/bin/python -m pytest -q             # macOS/Linux
+```
+
+Build the frontend:
+
+```bash
+cd frontend
+npm run build
+```
+
+The current verified baseline is 14 passing backend tests and a successful
+frontend production build.
 
 ## Documentation
 
-- [Product Requirements](docs/PRD.md)
+- [Backend setup and API endpoints](backend/README.md)
+- [Frontend setup](frontend/README.md)
+- [Product requirements](docs/PRD.md)
 - [Architecture](docs/ARCHITECTURE.md)
-- [Database Design](docs/DATABASE_DESIGN.md)
-- [UI/UX Brief](docs/UI_UX_BRIEF.md)
-- [Financial Calculations](docs/FINANCIAL_CALCULATIONS.md)
-- [Forecasting Methodology](docs/FORECASTING_METHODOLOGY.md)
-- [Threat Model](docs/THREAT_MODEL.md)
+- [Database design](docs/DATABASE_DESIGN.md)
+- [Financial calculations](docs/FINANCIAL_CALCULATIONS.md)
+- [Forecasting methodology](docs/FORECASTING_METHODOLOGY.md)
+- [Threat model](docs/THREAT_MODEL.md)
 
-## Project Status
+## Roadmap
 
-**Phase 1: Discovery** ✅ Complete
-- Repository audit
-- PRD
-- UI/UX brief
-- Architecture design
-- Financial calculation rules
-- Threat model
+- CSV import wizard in the frontend
+- Charts and analytics
+- Budgets and goals
+- Forecasting workflows
+- End-to-end testing
+- Production security hardening
+- Containerized application deployment
 
-**Phase 2: Implementation** 🚧 In Progress
-- Backend foundation
-- Database schema
-- Accounts and transactions API
-- CSV import/export
-- Frontend UI
+## Security
 
-## Quick Start
+This project is intended for local development and beta testing. Before
+production use:
 
-### Backend
+- Set a strong, unique `SECRET_KEY`.
+- Use a managed PostgreSQL instance with secure credentials.
+- Configure `ALLOWED_ORIGINS` for the deployed frontend only.
+- Store secrets in the deployment platform's secret manager.
+- Review the [threat model](docs/THREAT_MODEL.md).
 
-See [backend/README.md](backend/README.md) for detailed setup.
-
-**Quick version:**
-```bash
-cd backend
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-pip install -r requirements.txt
-# Start PostgreSQL (Docker or local)
-alembic upgrade head
-uvicorn app.main:app --reload
-```
-
-### Frontend
-
-*Coming soon.*
-
-## Development Status
-
-**Milestone A** ✅ Complete (Discovery)
-- Repository audit, PRD, architecture, threat model
-
-**Milestone B** ✅ Complete (Financial Foundation)
-- Database models, migrations, CRUD API
-- Transfer handling, balance calculations
-- Decimal-safe arithmetic (tests passing)
-
-**Milestone C** ✅ Complete (CSV Import)
-- File upload endpoint (multipart, 10MB limit)
-- Column mapping (date, amount/debit/credit, description)
-- Row validation with error details
-- Duplicate detection (fuzzy matching)
-- Import preview with status (valid/warning/error)
-- Batch import confirmation
-- Formula injection escaping
-
-**Milestone D** ✅ Complete (Frontend Foundation)
-- Next.js 14 setup with TypeScript
-- Dashboard with summary cards
-- Accounts and transactions display
-- API client with typed interfaces
-- IDR currency formatting
-- Responsive layout (Tailwind CSS)
-
-**Milestone E-F** ⏳ Next Steps
-- Account/transaction creation forms (Phase 8C)
-- CSV import wizard UI
-- Charts and analytics (Recharts)
-- Budgets & goals
-- Forecasting
-- Security hardening
-- E2E tests
-
-**Current Status: 92% MVP Complete**
-
-**Phase 8 (Auth) ✅ Complete:**
-- JWT authentication backend
-- Login/register frontend
-- All routes protected
-- Workspace isolation enforced
-
-**Remaining for 100% MVP:**
-- Account creation form (30 min)
-- Transaction creation form (30 min)
-- Basic chart (spending trend) (30 min)
-- Quick verification test (30 min)
-
-**Estimated completion: 2 hours**
+Please do not commit passwords, API keys, `.env` files, uploaded financial
+data, or database backups.
 
 ## License
 
-*To be determined.*
+This project is not currently licensed for redistribution. Add a license
+before publishing it for reuse.
 
 ## Contributing
 
-*Contribution guidelines will be added soon.*
+Issues and pull requests are welcome. Please include reproduction steps,
+tests for behavioral changes, and documentation updates where appropriate.

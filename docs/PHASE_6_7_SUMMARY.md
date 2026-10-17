@@ -63,14 +63,14 @@ cd backend
 pip install -r requirements.txt
 alembic upgrade head
 uvicorn app.main:app --reload
-# → http://localhost:8000
+# → http://localhost:8001
 ```
 
 **Frontend:**
 ```bash
 cd frontend
 npm install
-echo "NEXT_PUBLIC_API_URL=http://localhost:8000/api" > .env.local
+echo "NEXT_PUBLIC_API_URL=http://localhost:8001/api" > .env.local
 npm run dev
 # → http://localhost:3000
 ```

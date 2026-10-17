@@ -18,7 +18,7 @@ export function formatCurrency(amount: string | number, currency: string = 'IDR'
 
 export function formatDate(date: string | Date): string {
   const d = typeof date === 'string' ? new Date(date) : date;
-  return new Intl.DateFormat('id-ID', {
+  return new Intl.DateTimeFormat('id-ID', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
@@ -27,7 +27,7 @@ export function formatDate(date: string | Date): string {
 
 export function formatDateShort(date: string | Date): string {
   const d = typeof date === 'string' ? new Date(date) : date;
-  return new Intl.DateFormat('id-ID', {
+  return new Intl.DateTimeFormat('id-ID', {
     year: 'numeric',
     month: 'short',
     day: 'numeric',

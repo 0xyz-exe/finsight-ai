@@ -124,7 +124,7 @@ python -m alembic upgrade head
 
 # Start server
 python -m uvicorn app.main:app --reload
-# → http://localhost:8000
+# → http://localhost:8001
 ```
 
 ### Frontend Setup
@@ -135,7 +135,7 @@ cd frontend
 npm install
 
 # Create .env.local
-echo "NEXT_PUBLIC_API_URL=http://localhost:8000/api" > .env.local
+echo "NEXT_PUBLIC_API_URL=http://localhost:8001/api" > .env.local
 
 # Start dev server
 npm run dev
@@ -156,7 +156,7 @@ npm run dev
 
 ### Register User
 ```bash
-curl -X POST http://localhost:8000/api/auth/register \
+curl -X POST http://localhost:8001/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "email": "user@example.com",
@@ -167,7 +167,7 @@ curl -X POST http://localhost:8000/api/auth/register \
 
 ### Login
 ```bash
-curl -X POST http://localhost:8000/api/auth/login \
+curl -X POST http://localhost:8001/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{
     "email": "user@example.com",
@@ -180,7 +180,7 @@ curl -X POST http://localhost:8000/api/auth/login \
 ```bash
 TOKEN="<your-token>"
 
-curl -X POST http://localhost:8000/api/accounts \
+curl -X POST http://localhost:8001/api/accounts \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $TOKEN" \
   -d '{
@@ -193,7 +193,7 @@ curl -X POST http://localhost:8000/api/accounts \
 
 ### Create Transaction
 ```bash
-curl -X POST http://localhost:8000/api/transactions \
+curl -X POST http://localhost:8001/api/transactions \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $TOKEN" \
   -d '{
@@ -207,7 +207,7 @@ curl -X POST http://localhost:8000/api/transactions \
 
 ### Get Summary
 ```bash
-curl "http://localhost:8000/api/reports/summary?start_date=2026-10-01&end_date=2026-10-31" \
+curl "http://localhost:8001/api/reports/summary?start_date=2026-10-01&end_date=2026-10-31" \
   -H "Authorization: Bearer $TOKEN"
 ```
 
@@ -439,7 +439,7 @@ MVP is complete when:
 
 **FinSight AI MVP is production-ready for single-user deployment.** Core financial logic verified, authentication secured, workspace isolation enforced. Ready for beta testing and iterative feature development.
 
-**Total Development:** Phases 1-8 (18 commits, 8000+ lines)  
+**Total Development:** Phases 1-8 (18 commits, 8001+ lines)  
 **MVP Completion:** 100%  
 **Next Milestone:** Phase 9 (UI Polish + Charts)
 
