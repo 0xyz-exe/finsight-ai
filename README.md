@@ -3,6 +3,25 @@
 Personal finance and small-business financial analytics built with Next.js and
 FastAPI.
 
+Repository: https://github.com/0xyz-exe/finsight-ai
+
+## Screenshots
+
+### Financial Overview & Cash Flow Dashboard
+![Dashboard overview](docs/screenshots/01_dashboard.png)
+
+### Transaction History & Categorization
+![Transactions](docs/screenshots/02_transactions.png)
+
+### Account Management & Net Worth
+![Accounts](docs/screenshots/03_accounts.png)
+
+### Financial Analytics & Summary Reports
+![Reports](docs/screenshots/04_reports.png)
+
+### Authentication
+![Authentication](docs/screenshots/05_login.png)
+
 > **Status:** MVP complete and ready for beta testing.
 
 FinSight AI helps users track accounts and transactions, understand cash flow,
