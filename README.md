@@ -7,20 +7,25 @@ Repository: https://github.com/0xyz-exe/finsight-ai
 
 ## Screenshots
 
-### Financial Overview & Cash Flow Dashboard
-![Dashboard overview](docs/screenshots/01_dashboard.png)
+### 1. Financial Overview & Cash Flow Dashboard
+Dasbor utama FinSight AI untuk pemantauan kesehatan finansial dan arus kas secara real-time dengan kartu metrik ringkasan (Total Pemasukan, Total Pengeluaran, dan Arus Kas Bersih berformat mata uang IDR), panel ringkasan saldo per akun keuangan (Bank, Kas Tunai, Bisnis, Tabungan), serta daftar transaksi terkini dengan indikator visual berkode warna hijau dan merah yang memudahkan identifikasi mutasi kas:
+![Financial Overview & Cash Flow Dashboard](docs/screenshots/01_dashboard.png)
 
-### Transaction History & Categorization
-![Transactions](docs/screenshots/02_transactions.png)
+### 2. Transaction History & Categorization
+Antarmuka pencatatan dan kategorisasi transaksi keuangan yang fleksibel dengan dialog modal penambahan transaksi multi-tipe (Pemasukan, Pengeluaran, dan Transfer Antar Rekening), pemilihan akun sumber dan tujuan, input nominal desimal presisi, penentuan tanggal mutasi, serta penulisan deskripsi alur kas yang terhubung langsung ke buku kas workspace:
+![Transaction History & Categorization](docs/screenshots/02_transactions.png)
 
-### Account Management & Net Worth
-![Accounts](docs/screenshots/03_accounts.png)
+### 3. Account Management & Net Worth
+Pusat pengelolaan akun keuangan dan aset multi-kategori yang mendukung rekening giro operasional bank, rekening bisnis, kas kecil (petty cash), dan deposito tabungan jangka panjang dengan konfigurasi saldo awal, kode mata uang global (IDR), dan isolasi data berbasis workspace terenkripsi untuk mengkalkulasi kekayaan bersih secara akurat:
+![Account Management & Net Worth](docs/screenshots/03_accounts.png)
 
-### Financial Analytics & Summary Reports
-![Reports](docs/screenshots/04_reports.png)
+### 4. Financial Analytics & Summary Reports
+Panel pelaporan analitik keuangan yang menghitung agregasi total pemasukan, total pengeluaran operasional, dan arus kas bersih pada periode berjalan menggunakan kalkulasi desimal berbasis server yang aman dari floating-point rounding error, menyajikan wawasan likuiditas finansial untuk bisnis maupun personal:
+![Financial Analytics & Summary Reports](docs/screenshots/04_reports.png)
 
-### Authentication
-![Authentication](docs/screenshots/05_login.png)
+### 5. Secure JWT Authentication
+Gerbang autentikasi mandiri berbasis JSON Web Token (JWT) dengan alur login dan registrasi aman, proteksi kredensial menggunakan hashing password berbasis bcrypt, isolasi session pengguna, serta integrasi otomatis ke workspace finansial pribadi pengguna:
+![Secure JWT Authentication](docs/screenshots/05_login.png)
 
 > **Status:** MVP complete and ready for beta testing.
 
